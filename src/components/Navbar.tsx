@@ -32,9 +32,9 @@ const Navbar = () => {
   };
 
   return (
-    <>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/10 backdrop-blur-md border-b border-white/10' : 'bg-transparent'}`}>
       {/* Top Bar */}
-      <div className="hidden md:block bg-primary text-primary-foreground py-2">
+      {/* <div className={`hidden md:block py-2 transition-colors duration-300 ${isScrolled ? 'bg-black/20 text-white' : 'bg-transparent text-white/90'}`}>
         <div className="container-custom flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
             <a href="tel:+919876543210" className="flex items-center gap-2 hover:text-gold transition-colors">
@@ -47,35 +47,23 @@ const Navbar = () => {
             </a>
           </div>
           <div className="flex items-center gap-4">
-            <span className="badge-certification bg-gold/20 text-gold-light text-xs py-1">
+            <span className="badge-certification bg-white/10 text-white text-xs py-1 border border-white/20">
               IATA Certified
             </span>
-            <span className="badge-certification bg-gold/20 text-gold-light text-xs py-1">
+            <span className="badge-certification bg-white/10 text-white text-xs py-1 border border-white/20">
               ISO Certified
             </span>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Navbar */}
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`sticky top-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'bg-background/95 backdrop-blur-lg shadow-medium py-3'
-            : 'bg-transparent py-5'
-        }`}
-      >
+      <nav className="py-4">
         <div className="container-custom flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-display font-bold text-xl">gS</span>
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="font-display font-bold text-xl text-primary">goSignature</h1>
-              <p className="text-xs text-muted-foreground -mt-0.5">Travel Pvt Ltd</p>
+            <div className="sm:block">
+              <img src="./UTHRAM-YATRA1blue.png" alt="goSignature" width={'100px'}/>
             </div>
           </a>
 
@@ -85,9 +73,10 @@ const Navbar = () => {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="nav-link text-sm font-medium py-2"
+                className="text-sm font-medium py-2 text-white/90 hover:text-gold transition-colors relative group"
               >
                 {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full" />
               </button>
             ))}
           </div>
@@ -96,7 +85,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center gap-4">
             <button
               onClick={() => scrollToSection('#contact')}
-              className="btn-secondary py-3 px-6 text-sm rounded-full"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm py-3 px-6 text-sm rounded-full transition-all duration-300 hover:scale-105 font-medium"
             >
               Plan Your Trip
             </button>
@@ -105,12 +94,12 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+            className="lg:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -119,7 +108,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="fixed top-[72px] left-0 right-0 bg-background/98 backdrop-blur-lg z-40 border-b border-border lg:hidden"
+            className="fixed top-[100%] left-0 right-0 bg-black/90 backdrop-blur-xl border-t border-white/10 lg:hidden overflow-hidden"
           >
             <div className="container-custom py-6 flex flex-col gap-4">
               {navLinks.map((link, index) => (
@@ -129,14 +118,14 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-left py-3 px-4 rounded-lg hover:bg-muted transition-colors font-medium"
+                  className="text-left py-3 px-4 rounded-lg text-white/90 hover:bg-white/10 hover:text-gold transition-colors font-medium"
                 >
                   {link.name}
                 </motion.button>
               ))}
               <button
                 onClick={() => scrollToSection('#contact')}
-                className="btn-secondary py-3 mt-4 rounded-full text-center"
+                className="bg-gold text-black font-semibold py-3 mt-4 rounded-full text-center hover:bg-gold-light transition-colors"
               >
                 Plan Your Trip
               </button>
@@ -144,7 +133,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 };
 
