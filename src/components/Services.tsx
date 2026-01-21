@@ -158,10 +158,10 @@ const Services = () => {
                   <div className="w-14 h-14 rounded-xl bg-gradient-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
                     <service.icon className="w-7 h-7 text-primary-foreground" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-white transition-colors">
+                  <h3 className="text-lg font-semibold text-white mb-2 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-white/80 transition-colors">
+                  <p className="text-white/90 text-sm leading-relaxed transition-colors">
                     {service.description}
                   </p>
                 </div>
