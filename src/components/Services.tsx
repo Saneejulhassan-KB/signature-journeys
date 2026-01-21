@@ -14,6 +14,7 @@ import {
   Banknote,
   Ship,
   ChevronDown,
+  MousePointer2,
 } from "lucide-react";
 import EnquiryModal from "./EnquiryModal";
 
@@ -225,15 +226,30 @@ const Services = () => {
                     {service.description}
                   </p>
 
-                  {/* Tap again indicator for mobile */}
+                  {/* Visual Tap Indicator for Mobile */}
                   {activeCard === service.title && (
                     <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mt-4 flex items-center gap-2 text-secondary font-medium text-xs sm:hidden"
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ 
+                        opacity: 1, 
+                        scale: 1,
+                      }}
+                      className="absolute top-0 right-0 sm:hidden"
                     >
-                      <div className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
-                      Tap again to enquire
+                      <motion.div
+                        animate={{ 
+                          scale: [1, 1.2, 1],
+                          opacity: [0.7, 1, 0.7]
+                        }}
+                        transition={{ 
+                          duration: 2, 
+                          repeat: Infinity, 
+                          ease: "easeInOut" 
+                        }}
+                        className="bg-secondary/20 backdrop-blur-md p-2 rounded-full border border-secondary/30 shadow-lg shadow-secondary/20"
+                      >
+                        <MousePointer2 className="w-4 h-4 text-secondary fill-secondary/20" />
+                      </motion.div>
                     </motion.div>
                   )}
                 </div>
