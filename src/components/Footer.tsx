@@ -57,13 +57,14 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center">
+              {/* <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center">
                 <span className="text-primary-foreground font-display font-bold text-xl">gS</span>
               </div>
               <div>
                 <h3 className="font-display font-bold text-xl">goSignature</h3>
                 <p className="text-xs text-primary-foreground/70">Travel Pvt Ltd</p>
-              </div>
+              </div> */}
+              <img src="./UTHRAM-YATRA1blue.png" alt="" width={'100px'}/>
             </div>
             <p className="text-primary-foreground/80 leading-relaxed mb-6">
               Crafting unforgettable journeys since 2017. IATA & ISO certified travel agency 

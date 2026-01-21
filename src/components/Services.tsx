@@ -226,30 +226,24 @@ const Services = () => {
                     {service.description}
                   </p>
 
-                  {/* Visual Tap Indicator for Mobile */}
+                  {/* Combined Tap Indicator for Mobile */}
                   {activeCard === service.title && (
                     <motion.div
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ 
-                        opacity: 1, 
-                        scale: 1,
-                      }}
-                      className="absolute top-0 right-0 sm:hidden"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mt-4 sm:hidden"
                     >
-                      <motion.div
-                        animate={{ 
-                          scale: [1, 1.2, 1],
-                          opacity: [0.7, 1, 0.7]
-                        }}
-                        transition={{ 
-                          duration: 2, 
-                          repeat: Infinity, 
-                          ease: "easeInOut" 
-                        }}
-                        className="bg-secondary/20 backdrop-blur-md p-2 rounded-full border border-secondary/30 shadow-lg shadow-secondary/20"
-                      >
-                        <MousePointer2 className="w-4 h-4 text-secondary fill-secondary/20" />
-                      </motion.div>
+                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-white shadow-lg shadow-secondary/20">
+                        <motion.div
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          <MousePointer2 className="w-4 h-4 fill-white/20" />
+                        </motion.div>
+                        <span className="text-xs font-semibold whitespace-nowrap">
+                          Tap again to enquire
+                        </span>
+                      </div>
                     </motion.div>
                   )}
                 </div>
