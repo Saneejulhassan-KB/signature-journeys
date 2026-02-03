@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+
 import {
   Plane,
   Train,
@@ -17,6 +18,7 @@ import {
   MousePointer2,
 } from "lucide-react";
 import EnquiryModal from "./EnquiryModal";
+import "./ServicesGallery.css";
 
 const services = [
   {
@@ -117,11 +119,32 @@ const services = [
 ];
 
 const Services = () => {
-  const [showAll, setShowAll] = useState(false);
-  const visibleServices = showAll ? services : services.slice(0, 8);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [selectedService, setSelectedService] = useState("");
-  const [activeCard, setActiveCard] = useState<string | null>(null);
+
+  const totalServices = services.length;
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % totalServices);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? totalServices - 1 : prev - 1
+    );
+  };
+
+  useEffect(() => {
+    if (openModal) return; // pause when modal is open
+  
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % totalServices);
+    }, 1500); // 3 seconds (adjust if needed)
+  
+    return () => clearInterval(interval);
+  }, [totalServices, openModal]);
+  
 
   return (
     <section id="services" className="section-padding bg-muted/50">
@@ -146,148 +169,73 @@ const Services = () => {
           </p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <AnimatePresence mode="popLayout">
-            {visibleServices.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{
-                  duration: 0.4,
-                  delay: showAll ? 0 : index * 0.05,
-                }}
-                onClick={() => {
-                  const isMobile = window.innerWidth < 1024; // lg breakpoint
-                  if (!isMobile || activeCard === service.title) {
+        {/* Services gallery-style UI (unique to this section) */}
+        <div className="sj-services-gallery">
+          <ul className="sj-services-cards">
+            {services.map((service, index) => {
+              const offset =
+                (index - currentIndex + totalServices) % totalServices;
+
+              const isActive = offset === 0;
+              const distanceFromCenter =
+                offset === 0
+                  ? 0
+                  : offset <= totalServices / 2
+                  ? offset
+                  : offset - totalServices;
+
+              return (
+                <motion.li
+                  key={service.title}
+                  className="sj-services-card"
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{
+                    x: distanceFromCenter * 140,
+                    scale: isActive ? 1 : 0.8,
+                    opacity: Math.max(
+                      0.1,
+                      1 - Math.abs(distanceFromCenter) * 0.4
+                    ),
+                    zIndex: totalServices - Math.abs(distanceFromCenter),
+                  }}
+                  transition={{ type: "spring", stiffness: 260, damping: 26 }}
+                  onClick={() => {
                     setSelectedService(service.title);
                     setOpenModal(true);
-                  } else {
-                    setActiveCard(service.title);
-                  }
-                }}
-                className={`card-service group cursor-pointer relative transition-all duration-500 ${
-                  activeCard === service.title ? "-translate-y-2 shadow-card-hover" : ""
-                }`}
-              >
-                {/* Background Image and Overlay Container (Contained) */}
-                <div className="absolute inset-0 overflow-hidden rounded-2xl">
-                  {/* Background Image (Always Visible) */}
+                  }}
+                >
+                  <img src={service.image} alt={service.title} />
                   <div
-                    className={`absolute inset-0 bg-cover bg-center transition-all duration-700 opacity-100 ${
-                      activeCard === service.title ? "scale-100" : "scale-110 group-hover:scale-100"
-                    }`}
-                    style={{ backgroundImage: `url(${service.image})` }}
-                  />
+  className={`sj-services-card-label ${
+    isActive ? "active" : ""
+  }`}
+>
+  <service.icon className="sj-services-card-icon" />
+  <span>{service.title}</span>
+</div>
 
-                  {/* Dark Overlay (Always Visible, becomes lighter on hover to show image clearly) */}
-                  <div className={`absolute inset-0 transition-colors duration-500 ${
-                    activeCard === service.title ? "bg-black/20" : "bg-black/60 group-hover:bg-black/20"
-                  }`} />
-                </div>
+                </motion.li>
+              );
+            })}
+          </ul>
 
-                {/* Unique Design Shape at Bottom Left (Outwards) */}
-                <div className={`absolute -bottom-4 -left-4 w-24 h-24 transition-all duration-500 transform z-20 pointer-events-none ${
-                  activeCard === service.title 
-                    ? "opacity-100 translate-y-0 translate-x-0" 
-                    : "opacity-0 group-hover:opacity-100 translate-y-4 -translate-x-4 group-hover:translate-y-0 group-hover:translate-x-0"
-                }`}>
-                  <svg
-                    viewBox="0 0 100 100"
-                    className="w-full h-full text-secondary fill-current drop-shadow-xl"
-                  >
-                    <path
-                      d="M0 100 L0 20 Q0 0 20 0 L100 0 L100 100 Z"
-                      className="opacity-40"
-                    />
-                    <path
-                      d="M15 85 L15 40 Q15 25 30 25 L75 25 L75 85 Z"
-                      className="opacity-60"
-                    />
-                  </svg>
-                </div>
-
-                {/* Glow effect for the shape */}
-                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-secondary/30 rounded-full blur-3xl opacity-100 transition-all duration-700 z-0" />
-
-                {/* Content */}
-                <div className="relative z-10">
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-primary flex items-center justify-center mb-5 transition-all duration-300 ${
-                    activeCard === service.title ? "scale-110 shadow-lg shadow-primary/20" : "group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20"
-                  }`}>
-                    <service.icon className="w-7 h-7 text-primary-foreground" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-2 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-white/90 text-sm leading-relaxed transition-colors">
-                    {service.description}
-                  </p>
-
-                  {/* Combined Tap Indicator for Mobile */}
-                  {activeCard === service.title && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mt-4 sm:hidden"
-                    >
-                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-white shadow-lg shadow-secondary/20">
-                        <motion.div
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                        >
-                          <MousePointer2 className="w-4 h-4 fill-white/20" />
-                        </motion.div>
-                        <span className="text-xs font-semibold whitespace-nowrap">
-                          Tap again to enquire
-                        </span>
-                      </div>
-                    </motion.div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-
-        {/* Professional View More/Less Design */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mt-16 text-center"
-        >
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white border border-border rounded-full text-foreground font-semibold transition-all duration-500 hover:border-secondary hover:text-secondary hover:shadow-xl hover:shadow-secondary/10 overflow-hidden"
-          >
-            <span className="relative z-10">
-              {showAll ? "Show Less" : "Discover All Services"}
-            </span>
-            <motion.div
-              animate={showAll ? { y: [0, -4, 0] } : { y: [0, 4, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          <div className="sj-services-actions">
+            <button
+              type="button"
+              className="sj-services-button"
+              onClick={handlePrev}
             >
-              <ChevronDown
-                className={`w-5 h-5 relative z-10 transition-transform duration-500 ${
-                  showAll ? "rotate-180" : ""
-                }`}
-              />
-            </motion.div>
-
-            {/* Animated background on hover */}
-            <div className="absolute inset-0 bg-secondary/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-          </button>
-
-          <div className="mt-6 flex items-center justify-center gap-4 text-muted-foreground/40">
-            <div className="h-[1px] w-12 bg-current" />
-            <span className="text-xs uppercase tracking-widest font-medium">
-              {showAll ? "Collapse services" : "Explore more options"}
-            </span>
-            <div className="h-[1px] w-12 bg-current" />
+              Prev
+            </button>
+            <button
+              type="button"
+              className="sj-services-button"
+              onClick={handleNext}
+            >
+              Next
+            </button>
           </div>
-        </motion.div>
+        </div>
       </div>
       <EnquiryModal
         isOpen={openModal}

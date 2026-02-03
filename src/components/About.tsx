@@ -45,7 +45,26 @@ const CountUp = ({ end, suffix }: { end: number; suffix: string }) => {
 
 const About = () => {
   return (
-    <section id="about" className="section-padding bg-background">
+    <section id="about" className="section-padding bg-background relative overflow-hidden">
+      {/* Background clouds for subtle animation */}
+      <motion.img
+        src="/images/plane.png" // Assuming you have a cloud.png in public/images
+        alt="Cloud"
+        className="absolute top-1/4 -left-40 w-60 opacity-40"
+        animate={{ x: ['50%', '200%'] }}
+        transition={{
+          x: { repeat: Infinity, duration: 30, ease: 'linear' },
+        }}
+      />
+      {/* <motion.img
+        src="/images/plane.png"
+        alt="Cloud"
+        className="absolute bottom-1/4 -right-40 w-80 opacity-20"
+        animate={{ x: ['150%', 0] }}
+        transition={{
+          x: { repeat: Infinity, duration: 40, ease: 'linear', delay: 10 },
+        }}
+      /> */}
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
@@ -135,7 +154,7 @@ const About = () => {
         </div>
 
         {/* Founder Tribute */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -153,7 +172,7 @@ const About = () => {
             of goSignature Travel. His spirit of excellence and passion for creating extraordinary travel experiences 
             continues to guide us every day.
           </p>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
