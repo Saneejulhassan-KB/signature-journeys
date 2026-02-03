@@ -134,6 +134,46 @@
   box-shadow: 0 8px 25px rgba(15, 23, 42, 0.8);
 }
 
+.services-bg {
+  position: relative;
+  background:
+    radial-gradient(circle at top, #f8fafc, #e2e8f0);
+  overflow: hidden;
+}
+
+.services-content {
+  position: relative;
+  z-index: 100;
+}
+
+
+/* IMPORTANT: creates a local stacking context */
+.services-bg-3d {
+  position: relative;      /* 👈 this is the key */
+  overflow: hidden;
+  isolation: isolate;      /* 👈 prevents bleeding into hero */
+  /* background: radial-gradient(circle at top, #020617, #020617); */
+}
+
+/* canvas strictly inside services only */
+.services-3d-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.services-content {
+  position: relative;
+  z-index: 100;
+}
+
+
+
+
 @media (min-width: 768px) {
   .sj-services-gallery {
     min-height: 480px;

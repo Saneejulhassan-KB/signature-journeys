@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 import EnquiryModal from "./EnquiryModal";
 import "./ServicesGallery.css";
+import ServicesBackground from "./ServicesBackground";
+
 
 const services = [
   {
@@ -140,14 +142,21 @@ const Services = () => {
   
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % totalServices);
-    }, 1500); // 3 seconds (adjust if needed)
+    }, 2500); // 3 seconds (adjust if needed)
   
     return () => clearInterval(interval);
   }, [totalServices, openModal]);
   
 
   return (
-    <section id="services" className="section-padding bg-muted/50">
+    <section
+  id="services"
+  className="section-padding bg-muted/50 services-bg-3d"
+  
+>
+
+     
+     <ServicesBackground />
       <div className="container-custom">
         {/* Section Header */}
         <motion.div

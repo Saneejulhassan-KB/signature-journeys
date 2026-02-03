@@ -1,0 +1,43 @@
+.floating-cubes-wrapper {
+    position: absolute;
+    inset: 0;
+    perspective: 1000px;
+  }
+  
+  .floating-cube {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    background: linear-gradient(
+      135deg,
+      rgba(56, 189, 248, 0.35),
+      rgba(99, 102, 241, 0.25)
+    );
+    transform-style: preserve-3d;
+    box-shadow:
+      0 25px 60px rgba(2, 6, 23, 0.35),
+      inset 0 0 18px rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+    transition: transform 0.4s ease;
+  }
+  
+  /* BREAK EFFECT */
+  .floating-cube:hover {
+    animation: cube-break 0.6s forwards;
+  }
+  
+  @keyframes cube-break {
+    0% {
+      transform: scale(1) rotateX(0) rotateY(0);
+      opacity: 1;
+    }
+    40% {
+      transform: scale(1.2) rotateX(40deg) rotateY(40deg);
+    }
+    100% {
+      transform: scale(0.3) translateZ(-200px);
+      opacity: 0;
+    }
+  }
+  

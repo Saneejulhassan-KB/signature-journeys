@@ -1,12 +1,12 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
-import { Award, Users, Globe, Heart, MapPin, Calendar } from 'lucide-react';
+import { motion, useInView } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { Award, Users, Globe, Heart, MapPin, Calendar } from "lucide-react";
 
 const stats = [
-  { icon: Users, value: 5400, suffix: '+', label: 'Happy Travelers' },
-  { icon: Globe, value: 12, suffix: '', label: 'Overseas Partners' },
-  { icon: MapPin, value: 3, suffix: '', label: 'Office Locations' },
-  { icon: Calendar, value: 8, suffix: '+', label: 'Years Experience' },
+  { icon: Users, value: 5400, suffix: "+", label: "Happy Travelers" },
+  { icon: Globe, value: 12, suffix: "", label: "Overseas Partners" },
+  { icon: MapPin, value: 3, suffix: "", label: "Office Locations" },
+  { icon: Calendar, value: 8, suffix: "+", label: "Years Experience" },
 ];
 
 const CountUp = ({ end, suffix }: { end: number; suffix: string }) => {
@@ -16,7 +16,7 @@ const CountUp = ({ end, suffix }: { end: number; suffix: string }) => {
 
   useEffect(() => {
     if (isInView) {
-      const duration = 2000;
+      const duration = 1000;
       const steps = 60;
       const increment = end / steps;
       let current = 0;
@@ -45,17 +45,26 @@ const CountUp = ({ end, suffix }: { end: number; suffix: string }) => {
 
 const About = () => {
   return (
-    <section id="about" className="section-padding bg-background relative overflow-hidden">
+    <section
+      id="about"
+      className="section-padding bg-background relative overflow-hidden"
+    >
       {/* Background clouds for subtle animation */}
       <motion.img
-        src="/images/plane.png" // Assuming you have a cloud.png in public/images
-        alt="Cloud"
-        className="absolute top-1/4 -left-40 w-60 opacity-40"
-        animate={{ x: ['50%', '200%'] }}
+        src="/images/plane.png"
+        alt="Plane"
+        className="absolute bottom-0 -left-40 w-60 opacity-40"
+        animate={{
+          x: ["20%", "600%"],
+          y: ["20%", "-350%"],
+        }}
         transition={{
-          x: { repeat: Infinity, duration: 30, ease: 'linear' },
+          repeat: Infinity,
+          duration: 6,
+          ease: "linear",
         }}
       />
+
       {/* <motion.img
         src="/images/plane.png"
         alt="Cloud"
@@ -78,30 +87,50 @@ const About = () => {
               About Us
             </span>
             <h2 className="section-title mb-6">
-              Your Trusted <span className="text-secondary">Travel Partner</span>
+              Your Trusted{" "}
+              <span className="text-secondary">Travel Partner</span>
             </h2>
-            
+
             <div className="space-y-5 text-muted-foreground leading-relaxed">
               <p>
-                <strong className="text-foreground">goSignature Travel Pvt Ltd</strong> — where every journey is a masterpiece 
-                of dreams woven into reality. Established on the 1st of June, 2017, in Kurichithanam and later expanded 
-                to Monippally, Kottayam & Piravom, Ernakulam, our story reflects a visionary spirit ignited by our 
-                late founder, <strong className="text-foreground">Mr. Shinoj A.R</strong>, who sowed the seeds of this exceptional 
-                travel company in February 2015.
+                <strong className="text-foreground">
+                  goSignature Travel Pvt Ltd
+                </strong>{" "}
+                — where every journey is a masterpiece of dreams woven into
+                reality. Established on the 1st of June, 2017, in Kurichithanam
+                and later expanded to Monippally, Kottayam & Piravom, Ernakulam,
+                our story reflects a visionary spirit ignited by our late
+                founder,{" "}
+                <strong className="text-foreground">Mr. Shinoj A.R</strong>, who
+                sowed the seeds of this exceptional travel company in February
+                2015.
               </p>
               <p>
-                Today, we stand as a beacon of innovation in the travel industry with <strong className="text-foreground">IATA 
-                accreditation</strong> and <strong className="text-foreground">ISO certification</strong>, offering a state-of-the-art 
-                online travel booking portal and elegantly designed offices in Piravom & Monippally.
+                Today, we stand as a beacon of innovation in the travel industry
+                with{" "}
+                <strong className="text-foreground">IATA accreditation</strong>{" "}
+                and{" "}
+                <strong className="text-foreground">ISO certification</strong>,
+                offering a state-of-the-art online travel booking portal and
+                elegantly designed offices in Piravom & Monippally.
               </p>
               <p>
-                With <strong className="text-foreground">5400+ satisfied travelers</strong> and trusted partnerships with 
-                <strong className="text-foreground"> 12 overseas companies</strong>, our mission is to elevate customer experience 
-                through personalized travel planning, competitive pricing, and world-class service delivery.
+                With{" "}
+                <strong className="text-foreground">
+                  5400+ satisfied travelers
+                </strong>{" "}
+                and trusted partnerships with
+                <strong className="text-foreground">
+                  {" "}
+                  12 overseas companies
+                </strong>
+                , our mission is to elevate customer experience through
+                personalized travel planning, competitive pricing, and
+                world-class service delivery.
               </p>
               <p className="text-lg font-medium text-primary italic">
-                "The distance between your dream destination and us is just a call away. 
-                Let's create memories that last a lifetime—together."
+                "The distance between your dream destination and us is just a
+                call away. Let's create memories that last a lifetime—together."
               </p>
             </div>
 
@@ -110,15 +139,23 @@ const About = () => {
               <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-primary/5 border border-primary/10">
                 <Award className="w-8 h-8 text-primary" />
                 <div>
-                  <div className="font-semibold text-foreground text-sm">IATA Certified</div>
-                  <div className="text-xs text-muted-foreground">Accredited Agency</div>
+                  <div className="font-semibold text-foreground text-sm">
+                    IATA Certified
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Accredited Agency
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-secondary/5 border border-secondary/10">
                 <Heart className="w-8 h-8 text-secondary" />
                 <div>
-                  <div className="font-semibold text-foreground text-sm">ISO Certified</div>
-                  <div className="text-xs text-muted-foreground">Quality Assured</div>
+                  <div className="font-semibold text-foreground text-sm">
+                    ISO Certified
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Quality Assured
+                  </div>
                 </div>
               </div>
             </div>
