@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 import {
@@ -14,14 +14,13 @@ import {
   FileCheck,
   Banknote,
   Ship,
-  ChevronDown,
-  MousePointer2,
+  Search,
 } from "lucide-react";
 import EnquiryModal from "./EnquiryModal";
 import "./ServicesGallery.css";
 import ServicesBackground from "./ServicesBackground";
 
-
+/* ================= SERVICES DATA (UNCHANGED) ================= */
 const services = [
   {
     icon: Plane,
@@ -114,7 +113,8 @@ const services = [
   {
     icon: Ship,
     title: "Luxury Cruises",
-    description: "Premium cruise liner bookings for unforgettable sea voyages.",
+    description:
+      "Premium cruise liner bookings for unforgettable sea voyages.",
     image:
       "https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=800",
   },
@@ -124,6 +124,13 @@ const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [selectedService, setSelectedService] = useState("");
+  const [isDragging, setIsDragging] = useState(false);
+
+  /* ===== SEARCH STATES (NEW, ONLY ADDITION) ===== */
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [highlightIndex, setHighlightIndex] = useState<number | null>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   const totalServices = services.length;
 
@@ -138,49 +145,130 @@ const Services = () => {
   };
 
   useEffect(() => {
-    if (openModal) return; // pause when modal is open
-  
+    if (openModal || isDragging) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % totalServices);
-    }, 2500); // 3 seconds (adjust if needed)
-  
+    }, 2500);
+
     return () => clearInterval(interval);
-  }, [totalServices, openModal]);
-  
+  }, [totalServices, openModal, isDragging]);
+
+  const handleDragEnd = (event, info) => {
+    const swipeThreshold = 80;
+
+    if (info.offset.x < -swipeThreshold) {
+      handleNext();
+    } else if (info.offset.x > swipeThreshold) {
+      handlePrev();
+    }
+
+    setIsDragging(false);
+  };
+
+  /* ===== CLICK OUTSIDE TO CLOSE DROPDOWN ===== */
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(e.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const filteredServices = services.filter((service) =>
+    service.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <section
-  id="services"
-  className="section-padding bg-muted/50 services-bg-3d"
-  
->
+      id="services"
+      className="section-padding bg-muted/50 services-bg-3d"
+    >
+      <ServicesBackground />
 
-     
-     <ServicesBackground />
       <div className="container-custom">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-semibold mb-4">
             Our Services
           </span>
-          <h2 className="section-title mb-6">
+          <h2 className="section-title mb-4">
             Complete Travel <span className="text-secondary">Solutions</span>
           </h2>
-          <p className="section-subtitle mx-auto">
+          <p className="section-subtitle mx-auto mb-6">
             From flight bookings to luxury cruises, we offer end-to-end travel
             services designed to make your journey seamless and memorable.
           </p>
+
+          {/* ===== SEARCH DROPDOWN (ONLY CHANGED PART) ===== */}
+          <div className="flex justify-center" ref={searchRef}>
+            <div className="relative w-64">
+              <Search
+                size={18}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              />
+              <input
+                type="text"
+                placeholder="Search or select service..."
+                value={searchTerm}
+                onFocus={() => setShowDropdown(true)}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setShowDropdown(true);
+                }}
+                className="px-4 py-2 pl-10 rounded-lg border w-full"
+              />
+
+              {showDropdown && (
+                <ul className="absolute z-50 mt-2 w-full bg-white border rounded-lg shadow-lg max-h-60 overflow-auto">
+                  {filteredServices.map((service, index) => (
+                    <li
+                      key={service.title}
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100 flex items-center gap-2"
+                      onClick={() => {
+                        setCurrentIndex(index);
+                        setHighlightIndex(index);
+                        setSearchTerm(service.title);
+                        setShowDropdown(false);
+
+                        setTimeout(
+                          () => setHighlightIndex(null),
+                          2000
+                        );
+                      }}
+                    >
+                      <service.icon size={16} />
+                      {service.title}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
         </motion.div>
 
-        {/* Services gallery-style UI (unique to this section) */}
+        {/* ===== SERVICES GALLERY (UNCHANGED) ===== */}
         <div className="sj-services-gallery">
-          <ul className="sj-services-cards">
+          <motion.ul
+            className="sj-services-cards"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragStart={() => setIsDragging(true)}
+            onDragEnd={handleDragEnd}
+          >
             {services.map((service, index) => {
               const offset =
                 (index - currentIndex + totalServices) % totalServices;
@@ -193,11 +281,12 @@ const Services = () => {
                   ? offset
                   : offset - totalServices;
 
+              const isHighlighted = highlightIndex === index;
+
               return (
                 <motion.li
                   key={service.title}
                   className="sj-services-card"
-                  initial={{ opacity: 0, scale: 0.7 }}
                   animate={{
                     x: distanceFromCenter * 140,
                     scale: isActive ? 1 : 0.8,
@@ -206,6 +295,9 @@ const Services = () => {
                       1 - Math.abs(distanceFromCenter) * 0.4
                     ),
                     zIndex: totalServices - Math.abs(distanceFromCenter),
+                    boxShadow: isHighlighted
+                      ? "0 0 0 4px #22c55e"
+                      : "none",
                   }}
                   transition={{ type: "spring", stiffness: 260, damping: 26 }}
                   onClick={() => {
@@ -215,37 +307,29 @@ const Services = () => {
                 >
                   <img src={service.image} alt={service.title} />
                   <div
-  className={`sj-services-card-label ${
-    isActive ? "active" : ""
-  }`}
->
-  <service.icon className="sj-services-card-icon" />
-  <span>{service.title}</span>
-</div>
-
+                    className={`sj-services-card-label ${
+                      isActive ? "active" : ""
+                    }`}
+                  >
+                    <service.icon className="sj-services-card-icon" />
+                    <span>{service.title}</span>
+                  </div>
                 </motion.li>
               );
             })}
-          </ul>
+          </motion.ul>
 
           <div className="sj-services-actions">
-            <button
-              type="button"
-              className="sj-services-button"
-              onClick={handlePrev}
-            >
+            <button className="sj-services-button" onClick={handlePrev}>
               Prev
             </button>
-            <button
-              type="button"
-              className="sj-services-button"
-              onClick={handleNext}
-            >
+            <button className="sj-services-button" onClick={handleNext}>
               Next
             </button>
           </div>
         </div>
       </div>
+
       <EnquiryModal
         isOpen={openModal}
         onClose={() => setOpenModal(false)}

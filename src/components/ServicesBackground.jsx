@@ -46,8 +46,8 @@ const ServicesBackground = () => {
         const force = Math.max(0, 120 - dist);
         const depth = force * 0.25;
 
-        p.x += (p.ox - dx * depth * 0.01 - p.x) * 0.1;
-        p.y += (p.oy - dy * depth * 0.01 - p.y) * 0.1;
+        p.x += (p.ox - dx * depth * 0.01 - p.x) * 0.5;
+        p.y += (p.oy - dy * depth * 0.01 - p.y) * 0.5;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
