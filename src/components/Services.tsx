@@ -228,15 +228,15 @@ const Services = () => {
                   setSearchTerm(e.target.value);
                   setShowDropdown(true);
                 }}
-                className="px-4 py-2 pl-10 rounded-lg border w-full"
+                className="px-4 py-2 pl-10 rounded-lg border w-full bg-background text-foreground border-border focus:ring-2 focus:ring-secondary/50 outline-none transition-all"
               />
 
               {showDropdown && (
-                <ul className="absolute z-50 mt-2 w-full bg-white border rounded-lg shadow-lg max-h-60 overflow-auto">
+                <ul className="absolute z-50 mt-2 w-full bg-card text-card-foreground border border-border rounded-lg shadow-xl max-h-60 overflow-auto backdrop-blur-md">
                   {filteredServices.map((service, index) => (
                     <li
                       key={service.title}
-                      className="px-4 py-2 cursor-pointer hover:bg-gray-100 flex items-center gap-2"
+                      className="px-4 py-2 cursor-pointer hover:bg-muted text-card-foreground flex items-center gap-2 transition-colors"
                       onClick={() => {
                         setCurrentIndex(index);
                         setHighlightIndex(index);
