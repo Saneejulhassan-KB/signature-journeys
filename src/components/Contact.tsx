@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Clock, 
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
   Send,
   MessageCircle,
-  CheckCircle
-} from 'lucide-react';
-import { toast } from 'sonner';
+  CheckCircle,
+} from "lucide-react";
+import { toast } from "sonner";
 
 const offices = [
   {
-    name: 'Andoor Office',
-    address: 'Andoor, Marangattupilly, Kottayam',
-    phone: '+91 7510676799',
-    email: 'holidaysuthram@gmail.com',
+    name: "Andoor Office",
+    address: "Andoor, Marangattupilly, Kottayam",
+    phone: "+91 7510676799",
+    email: "holidaysuthram@gmail.com",
   },
   // {
   //   name: 'Monippally Office',
@@ -28,15 +28,17 @@ const offices = [
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -47,24 +49,24 @@ const Contact = () => {
     // Format message for WhatsApp
     const whatsappMessage = encodeURIComponent(
       `*New Enquiry from Website*\n\n` +
-      `*Name:* ${formData.name}\n` +
-      `*Email:* ${formData.email}\n` +
-      `*Phone:* ${formData.phone}\n` +
-      `*Message:* ${formData.message}`
+        `*Name:* ${formData.name}\n` +
+        `*Email:* ${formData.email}\n` +
+        `*Phone:* ${formData.phone}\n` +
+        `*Message:* ${formData.message}`
     );
 
     // Simulate a brief delay
     setTimeout(() => {
       // Open WhatsApp with the message
-      window.open(`https://wa.me/7510676799?text=${whatsappMessage}`, '_blank');
-      
+      window.open(`https://wa.me/7510676799?text=${whatsappMessage}`, "_blank");
+
       setIsSubmitting(false);
       setIsSubmitted(true);
-      toast.success('Redirecting to WhatsApp...');
-      
+      toast.success("Redirecting to WhatsApp...");
+
       // Reset form after a delay
       setTimeout(() => {
-        setFormData({ name: '', email: '', phone: '', message: '' });
+        setFormData({ name: "", email: "", phone: "", message: "" });
         setIsSubmitted(false);
       }, 3000);
     }, 500);
@@ -87,7 +89,8 @@ const Contact = () => {
             Let's Plan Your <span className="text-secondary">Dream Trip</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Reach out to us and our travel experts will help you create the perfect journey.
+            Reach out to us and our travel experts will help you create the
+            perfect journey.
           </p>
         </motion.div>
 
@@ -120,7 +123,10 @@ const Contact = () => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     Full Name *
                   </label>
                   <input
@@ -137,7 +143,10 @@ const Contact = () => {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Email Address *
                     </label>
                     <input
@@ -152,7 +161,10 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Phone Number *
                     </label>
                     <input
@@ -169,7 +181,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     Your Message *
                   </label>
                   <textarea
@@ -203,7 +218,8 @@ const Contact = () => {
                 </button>
 
                 <p className="text-xs text-muted-foreground text-center">
-                  Your enquiry will be sent directly to our WhatsApp for faster response.
+                  Your enquiry will be sent directly to our WhatsApp for faster
+                  response.
                 </p>
               </form>
             )}
@@ -235,11 +251,17 @@ const Contact = () => {
                     <MapPin className="w-4 h-4 mt-1 text-primary" />
                     {office.address}
                   </p>
-                  <a href={`tel:${office.phone.replace(/\s/g, '')}`} className="flex items-center gap-3 hover:text-primary transition-colors">
+                  <a
+                    href={`tel:${office.phone.replace(/\s/g, "")}`}
+                    className="flex items-center gap-3 hover:text-primary transition-colors"
+                  >
                     <Phone className="w-4 h-4 text-primary" />
                     {office.phone}
                   </a>
-                  <a href={`mailto:${office.email}`} className="flex items-center gap-3 hover:text-primary transition-colors">
+                  <a
+                    href={`mailto:${office.email}`}
+                    className="flex items-center gap-3 hover:text-primary transition-colors"
+                  >
                     <Mail className="w-4 h-4 text-primary" />
                     {office.email}
                   </a>
@@ -262,7 +284,9 @@ const Contact = () => {
               <div className="space-y-2 text-muted-foreground">
                 <p className="flex justify-between">
                   <span>Monday - Saturday</span>
-                  <span className="font-medium text-foreground">9:30 AM - 6:30 PM</span>
+                  <span className="font-medium text-foreground">
+                    9:30 AM - 6:30 PM
+                  </span>
                 </p>
                 <p className="flex justify-between">
                   <span>Sunday</span>
@@ -301,7 +325,7 @@ const Contact = () => {
           className="mt-16 rounded-3xl overflow-hidden shadow-card border border-border/50"
         >
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3932.3!2d76.5!3d9.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNDgnMDAuMCJOIDc2wrAzMCcwMC4wIkU!5e0!3m2!1sen!2sin!4v1234567890"
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3932.384930850712!2d76.62369137502769!3d9.733424090358799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOcKwNDQnMDAuMyJOIDc2wrAzNyczNC42IkU!5e0!3m2!1sen!2sin!4v1770467224731!5m2!1sen!2sin"
             width="100%"
             height="400"
             style={{ border: 0 }}
