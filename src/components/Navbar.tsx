@@ -45,7 +45,7 @@ const Navbar = () => {
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3">
             <div className="sm:block">
-              <img src="./UTHRAM-YATRA1blue.png" alt="goSignature" className={`w-[100px] transition-all duration-300 ${theme === 'dark' ? 'brightness-110' : 'brightness-100'}`} />
+              <img src="./UTHRAM-YATRA1blue.png" alt="Uthram Yathra Holidays" className={`w-[100px] transition-all duration-300 ${theme === 'dark' ? 'brightness-110' : 'brightness-100'}`} />
             </div>
           </a>
 

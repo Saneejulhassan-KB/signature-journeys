@@ -15,6 +15,7 @@ import {
   Banknote,
   Ship,
   Search,
+  Users,
 } from "lucide-react";
 import EnquiryModal from "./EnquiryModal";
 import "./ServicesGallery.css";
@@ -23,22 +24,6 @@ import ServicesBackground from "./ServicesBackground";
 /* ================= SERVICES DATA (UNCHANGED) ================= */
 const services = [
   {
-    icon: Plane,
-    title: "Air Ticketing",
-    description:
-      "Domestic & international flight bookings at competitive prices with 24/7 support.",
-    image:
-      "https://images.unsplash.com/photo-1436491865332-7a61a109c0f3?auto=format&fit=crop&q=80&w=800",
-  },
-  {
-    icon: Train,
-    title: "Railway Ticketing",
-    description:
-      "Hassle-free train reservations across India with confirmed tickets.",
-    image:
-      "https://images.unsplash.com/photo-1474487056289-622ad5096174?auto=format&fit=crop&q=80&w=800",
-  },
-  {
     icon: Bus,
     title: "Bus Ticketing",
     description:
@@ -46,6 +31,39 @@ const services = [
     image:
       "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800",
   },
+  {
+    icon: Users,
+    title: "Pro Driver Services",
+    description:
+      "Experienced and reliable drivers available for outstation trips, tours, and private travel ensuring safe and comfortable journeys.",
+    image:
+      "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    icon: Bus,
+    title: "Tourist Bus Services",
+    description:
+      "Own fleet of well-maintained tourist buses for group tours, school trips, pilgrimages, and corporate travel across India.",
+    image:
+      "https://images.unsplash.com/photo-1570125909517-53cb21c89ff2?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    icon: Plane,
+    title: "Air Ticketing",
+    description:
+      "Domestic & international flight bookings at competitive prices with 24/7 support.",
+    image:
+      "https://content.jdmagicbox.com/v2/comp/mumbai/i7/022pxx22.xx22.211217192939.k8i7/catalogue/dreams-gateway-travels-kalamboli-navi-mumbai-domestic-air-ticketing-agents-c26u31ogr4.jpg",
+  },
+  {
+    icon: Train,
+    title: "Railway Ticketing",
+    description:
+      "Hassle-free train reservations across India with confirmed tickets.",
+    image:
+      "https://assets.upstox.com/content/assets/images/news/indianrailwaysticketrule.webp",
+  },
+  
   {
     icon: FileText,
     title: "Passport & Visa",

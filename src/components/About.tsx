@@ -3,10 +3,30 @@ import { useRef, useEffect, useState } from "react";
 import { Award, Users, Globe, Heart, MapPin, Calendar } from "lucide-react";
 
 const stats = [
-  { icon: Users, value: 5400, suffix: "+", label: "Happy Travelers" },
-  { icon: Globe, value: 12, suffix: "", label: "Overseas Partners" },
-  { icon: MapPin, value: 3, suffix: "", label: "Office Locations" },
-  { icon: Calendar, value: 8, suffix: "+", label: "Years Experience" },
+  {
+    icon: Calendar,
+    value: 7,
+    suffix: "+",
+    label: "Years in Travel (Since 2018)",
+  },
+  {
+    icon: Globe,
+    value: 25,
+    suffix: "+",
+    label: "Destinations Covered",
+  },
+  {
+    icon: Users,
+    value: 1000,
+    suffix: "+",
+    label: "Happy Travelers Served",
+  },
+  {
+    icon: MapPin,
+    value: 1,
+    suffix: "",
+    label: "Operational Base",
+  },
 ];
 
 const CountUp = ({ end, suffix }: { end: number; suffix: string }) => {
@@ -94,48 +114,37 @@ const About = () => {
             <div className="space-y-5 text-muted-foreground leading-relaxed">
               <p>
                 <strong className="text-foreground">
-                  goSignature Travel Pvt Ltd
+                  Uthram Yathra Holidays Pvt. Ltd.
                 </strong>{" "}
-                — where every journey is a masterpiece of dreams woven into
-                reality. Established on the 1st of June, 2017, in Kurichithanam
-                and later expanded to Monippally, Kottayam & Piravom, Ernakulam,
-                our story reflects a visionary spirit ignited by our late
-                founder,{" "}
-                <strong className="text-foreground">Mr. Shinoj A.R</strong>, who
-                sowed the seeds of this exceptional travel company in February
-                2015.
-              </p>
-              <p>
-                Today, we stand as a beacon of innovation in the travel industry
-                with{" "}
-                <strong className="text-foreground">IATA accreditation</strong>{" "}
-                and{" "}
-                <strong className="text-foreground">ISO certification</strong>,
-                offering a state-of-the-art online travel booking portal and
-                elegantly designed offices in Piravom & Monippally.
-              </p>
-              <p>
-                With{" "}
+                — Andoor, Marangattupilly. Stepping into a new world of travel!
+                Led by{" "}
+                <strong className="text-foreground">Adarsh Sharma G</strong>, we
+                are transforming journeys into unforgettable memories. With{" "}
                 <strong className="text-foreground">
-                  5400+ satisfied travelers
+                  Uthram Tourist Buses
                 </strong>{" "}
-                and trusted partnerships with
-                <strong className="text-foreground">
-                  {" "}
-                  12 overseas companies
-                </strong>
-                , our mission is to elevate customer experience through
-                personalized travel planning, competitive pricing, and
-                world-class service delivery.
+                (since February 8, 2018) and thoughtfully curated tour packages,
+                we are redefining travel experiences across the globe.
               </p>
+
+              <p>
+                Our vision is centered on delivering meaningful and inspiring
+                travel experiences that go beyond destinations. We focus on
+                comfort, reliability, and personalized service to ensure every
+                traveler enjoys a seamless and memorable journey.
+              </p>
+
               <p className="text-lg font-medium text-primary italic">
-                "The distance between your dream destination and us is just a
-                call away. Let's create memories that last a lifetime—together."
+                "Crafting Journeys, Creating Memories, Connecting Worlds."
+              </p>
+
+              <p className="text-lg font-semibold text-secondary">
+                Explore the Uthram Way — Where Every Journey Finds Its Story.
               </p>
             </div>
 
             {/* Certifications */}
-            <div className="flex flex-wrap gap-4 mt-8">
+            {/* <div className="flex flex-wrap gap-4 mt-8">
               <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-primary/5 border border-primary/10">
                 <Award className="w-8 h-8 text-primary" />
                 <div>
@@ -158,7 +167,7 @@ const About = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Stats Grid */}

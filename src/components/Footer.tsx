@@ -1,47 +1,58 @@
-import { motion } from 'framer-motion';
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Facebook, 
-  Instagram, 
+import { motion } from "framer-motion";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
   Youtube,
-  ArrowUp
-} from 'lucide-react';
+  ArrowUp,
+} from "lucide-react";
 
 const quickLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'Services', href: '#services' },
-  { name: 'About Us', href: '#about' },
-  { name: 'Gallery', href: '#gallery' },
-  { name: 'Testimonials', href: '#testimonials' },
-  { name: 'Contact', href: '#contact' },
+  { name: "Home", href: "#home" },
+  { name: "Services", href: "#services" },
+  { name: "About Us", href: "#about" },
+  { name: "Gallery", href: "#gallery" },
+  { name: "Testimonials", href: "#testimonials" },
+  { name: "Contact", href: "#contact" },
 ];
 
-const services = [
-  'Air Ticketing',
-  'Tour Packages',
-  'Visa Assistance',
-  'Hotel Booking',
-  'Car Rental',
-  'Travel Insurance',
+const servicesColumn1 = [
+  "Air Ticketing",
+  "Tour Packages",
+  "Visa Assistance",
+  "Hotel Reservation",
+  "Car Rental",
+  "Travel Insurance",
+  "Bus Ticketing",
+];
+
+const servicesColumn2 = [
+  "Railway Ticketing",
+  "Pro Driver Services",
+  "Tourist Bus Services",
+  "Embassy Attestation",
+  "Police Clearance",
+  "Forex Services",
+  "Luxury Cruises",
 ];
 
 const socialLinks = [
-  { icon: Facebook, href: 'https://facebook.com/gosignaturetravel', label: 'Facebook' },
-  { icon: Instagram, href: 'https://instagram.com/gosignaturetravel', label: 'Instagram' },
-  { icon: Youtube, href: 'https://youtube.com/gosignaturetravel', label: 'Youtube' },
+  { icon: Facebook, href: "", label: "Facebook" },
+  { icon: Instagram, href: "", label: "Instagram" },
+  { icon: Youtube, href: "", label: "Youtube" },
 ];
 
 const Footer = () => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -49,7 +60,7 @@ const Footer = () => {
     <footer className="bg-[#132c4e] text-white">
       {/* Main Footer */}
       <div className="container-custom py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Company Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -64,11 +75,12 @@ const Footer = () => {
                 <h3 className="font-display font-bold text-xl">goSignature</h3>
                 <p className="text-xs text-primary-foreground/70">Travel Pvt Ltd</p>
               </div> */}
-              <img src="./UTHRAM-YATRA1blue.png" alt="" width={'100px'}/>
+              <img src="./UTHRAM-YATRA1blue.png" alt="" width={"100px"} />
             </div>
             <p className="text-white/80 leading-relaxed mb-6">
-              Crafting unforgettable journeys since 2017. IATA & ISO certified travel agency 
-              providing world-class travel services.
+              Since 2018, Uthram Tourist Buses has been transforming journeys
+              into unforgettable memories with trusted bus services and curated
+              travel experiences.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -108,7 +120,7 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Services */}
+          {/* Services Column 1 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -117,7 +129,23 @@ const Footer = () => {
           >
             <h4 className="font-semibold text-lg mb-6">Our Services</h4>
             <ul className="space-y-3">
-              {services.map((service) => (
+              {servicesColumn1.map((service) => (
+                <li key={service}>
+                  <span className="text-white/80">{service}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Services Column 2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.25 }}
+          >
+            <ul className="space-y-3 lg:mt-0 md:mt-0">
+              {servicesColumn2.map((service) => (
                 <li key={service}>
                   <span className="text-white/80">{service}</span>
                 </li>
@@ -137,27 +165,25 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-0.5 text-gold" />
                 <span className="text-white/80">
-                  Piravom, Ernakulam<br />
-                  Monippally, Kottayam<br />
-                  Kerala, India
+                  Andoor, Marangattupilly Kerala, India
                 </span>
               </li>
               <li>
-                <a 
-                  href="tel:+919876543210" 
+                <a
+                  href="tel:+917510676799"
                   className="flex items-center gap-3 text-white/80 hover:text-gold transition-colors"
                 >
                   <Phone className="w-5 h-5 text-gold" />
-                  +91 98765 43210
+                  +91 7510676799
                 </a>
               </li>
               <li>
-                <a 
-                  href="mailto:info@gosignature.com" 
+                <a
+                  href="mailto:holidaysuthram@gmail.com"
                   className="flex items-center gap-3 text-white/80 hover:text-gold transition-colors"
                 >
                   <Mail className="w-5 h-5 text-gold" />
-                  info@gosignature.com
+                  holidaysuthram@gmail.com
                 </a>
               </li>
             </ul>
@@ -169,11 +195,16 @@ const Footer = () => {
       <div className="border-t border-white/10">
         <div className="container-custom py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/60 text-sm text-center sm:text-left">
-            © {new Date().getFullYear()} goSignature Travel Pvt Ltd. All rights reserved.
+            © {new Date().getFullYear()} Uthram Yathra Holidays Pvt. Ltd. All
+            rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-white/60">
-            <a href="#" className="hover:text-gold transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-gold transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-gold transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-gold transition-colors">
+              Terms of Service
+            </a>
           </div>
         </div>
       </div>

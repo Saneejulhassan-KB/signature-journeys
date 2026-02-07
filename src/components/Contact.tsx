@@ -13,17 +13,17 @@ import { toast } from 'sonner';
 
 const offices = [
   {
-    name: 'Piravom Office',
-    address: 'Piravom, Ernakulam, Kerala',
-    phone: '+91 98765 43210',
-    email: 'piravom@gosignature.com',
+    name: 'Andoor Office',
+    address: 'Andoor, Marangattupilly, Kottayam',
+    phone: '+91 7510676799',
+    email: 'holidaysuthram@gmail.com',
   },
-  {
-    name: 'Monippally Office',
-    address: 'Monippally, Kottayam, Kerala',
-    phone: '+91 98765 43211',
-    email: 'monippally@gosignature.com',
-  },
+  // {
+  //   name: 'Monippally Office',
+  //   address: 'Monippally, Kottayam, Kerala',
+  //   phone: '+91 98765 43211',
+  //   email: 'monippally@gosignature.com',
+  // },
 ];
 
 const Contact = () => {
@@ -56,7 +56,7 @@ const Contact = () => {
     // Simulate a brief delay
     setTimeout(() => {
       // Open WhatsApp with the message
-      window.open(`https://wa.me/919876543210?text=${whatsappMessage}`, '_blank');
+      window.open(`https://wa.me/7510676799?text=${whatsappMessage}`, '_blank');
       
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -163,7 +163,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                      placeholder="+91 98765 43210"
+                      placeholder="Enter your phone number"
                     />
                   </div>
                 </div>
@@ -273,7 +273,7 @@ const Contact = () => {
 
             {/* Quick WhatsApp */}
             <motion.a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/7510676799"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
@@ -308,7 +308,7 @@ const Contact = () => {
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="goSignature Travel Office Location"
+            title="Uthram Yathra Holidays Pvt. Ltd. Travel Office Location"
           />
         </motion.div>
       </div>

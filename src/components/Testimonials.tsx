@@ -7,14 +7,14 @@ const testimonials = [
     name: 'Arun Krishnan',
     location: 'Kottayam',
     rating: 5,
-    text: 'Exceptional service! goSignature made our family trip to Europe absolutely flawless. From visa assistance to hotel bookings, everything was perfectly coordinated. Highly recommend!',
+    text: 'Exceptional service! Uthram Yathra Holidays made our family trip to Europe absolutely flawless. From visa assistance to hotel bookings, everything was perfectly coordinated. Highly recommend!',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
   },
   {
     name: 'Priya Thomas',
     location: 'Ernakulam',
     rating: 5,
-    text: 'The team at goSignature went above and beyond for our honeymoon in Maldives. Every detail was taken care of. Truly a world-class travel agency!',
+    text: 'The team at Uthram Yathra Holidays went above and beyond for our honeymoon in Maldives. Every detail was taken care of. Truly a world-class travel agency!',
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
   },
   {
@@ -28,7 +28,7 @@ const testimonials = [
     name: 'Lakshmi Nair',
     location: 'Piravom',
     rating: 5,
-    text: "Professional, reliable, and always available. goSignature has been our family's go-to travel partner for 4 years now. Never disappointed!",
+    text: "Professional, reliable, and always available. Uthram Yathra Holidays has been our family's go-to travel partner for 4 years now. Never disappointed!",
     image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150',
   },
   {
@@ -104,7 +104,7 @@ const Testimonials = () => {
             What Our <span className="text-secondary-foreground font-extrabold">Travelers Say</span>
           </h2>
           <p className="section-subtitle mx-auto text-white/80">
-            Join over 5400+ happy travelers who have experienced the goSignature difference.
+            Join over 1000+ happy travelers who have experienced the Uthram Yathra Holidays difference.
           </p>
         </motion.div>
 
@@ -116,7 +116,7 @@ const Testimonials = () => {
           className="flex justify-center mb-12"
         >
           <a
-            href="https://www.google.com/search?q=goSignature+Travel"
+            href=""
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-4 px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-xl shadow-2xl hover:bg-white/20 transition-all duration-500 border border-white/20 group"

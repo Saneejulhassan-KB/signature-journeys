@@ -6,7 +6,7 @@ const WhatsAppButton = () => {
     const message = encodeURIComponent(
       'Hello! I would like to enquire about your travel services.'
     );
-    window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+    window.open(`https://wa.me/7510676799?text=${message}`, '_blank');
   };
 
   return (

@@ -1,95 +1,136 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ArrowRight, MessageCircle, Plane, Train, Bus, FileText, 
-  Map, Car, Building2, Stamp, Shield, FileCheck, Banknote, Ship 
-} from 'lucide-react';
-import heroImage from '@/assets/hero-travel.jpg';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowRight,
+  MessageCircle,
+  Plane,
+  Train,
+  Bus,
+  FileText,
+  Map,
+  Car,
+  Building2,
+  Stamp,
+  Shield,
+  FileCheck,
+  Banknote,
+  Ship,
+  Users,
+} from "lucide-react";
+import heroImage from "@/assets/hero-travel.jpg";
 
 const services = [
-  { 
-    icon: Plane, 
-    title: 'Air Ticketing', 
-    desc: 'Domestic & international flights',
-    color: 'from-blue-400 to-blue-600',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: Bus,
+    title: "Bus Ticketing",
+    description:
+      "Comfortable bus travel bookings for short and long-distance journeys.",
+    image:
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: Train, 
-    title: 'Railway Ticketing', 
-    desc: 'Confirmed train reservations',
-    color: 'from-red-400 to-red-600',
-    image: 'https://images.unsplash.com/photo-1474487548417-781cb714c223?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: Users,
+    title: "Pro Driver Services",
+    description:
+      "Experienced and reliable drivers available for outstation trips, tours, and private travel ensuring safe and comfortable journeys.",
+    image:
+      "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: Bus, 
-    title: 'Bus Ticketing', 
-    desc: 'Comfortable bus journeys',
-    color: 'from-yellow-400 to-yellow-600',
-    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: Bus,
+    title: "Tourist Bus Services",
+    description:
+      "Own fleet of well-maintained tourist buses for group tours, school trips, pilgrimages, and corporate travel across India.",
+    image:
+      "https://images.unsplash.com/photo-1570125909517-53cb21c89ff2?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: FileText, 
-    title: 'Passport & Visa', 
-    desc: 'Expert visa assistance',
-    color: 'from-green-400 to-green-600',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: Plane,
+    title: "Air Ticketing",
+    description:
+      "Domestic & international flight bookings at competitive prices with 24/7 support.",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109c0f3?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: Map, 
-    title: 'Tour Packages', 
-    desc: 'Customized holiday packages',
-    color: 'from-orange-400 to-orange-600',
-    image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: Train,
+    title: "Railway Ticketing",
+    description:
+      "Hassle-free train reservations across India with confirmed tickets.",
+    image:
+      "https://images.unsplash.com/photo-1474487056289-622ad5096174?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: Car, 
-    title: 'Car Rental', 
-    desc: 'Reliable car rentals',
-    color: 'from-indigo-400 to-indigo-600',
-    image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80'
+
+  {
+    icon: FileText,
+    title: "Passport & Visa",
+    description:
+      "Complete passport and visa assistance for all countries with expert guidance.",
+    image:
+      "https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: Building2, 
-    title: 'Hotel Reservation', 
-    desc: 'Luxury & budget stays',
-    color: 'from-emerald-400 to-emerald-600',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: Map,
+    title: "Tour Packages",
+    description:
+      "Curated domestic and international tour packages tailored to your preferences.",
+    image:
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: Stamp, 
-    title: 'Attestation', 
-    desc: 'Embassy & document services',
-    color: 'from-pink-400 to-pink-600',
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: Car,
+    title: "Car Rental",
+    description:
+      "Reliable car rental services with professional drivers for all occasions.",
+    image:
+      "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: Shield, 
-    title: 'Travel Insurance', 
-    desc: 'Comprehensive coverage',
-    color: 'from-cyan-400 to-cyan-600',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: Building2,
+    title: "Hotel Reservation",
+    description:
+      "Best hotel deals worldwide from budget stays to luxury resorts.",
+    image:
+      "https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: FileCheck, 
-    title: 'Police Clearance', 
-    desc: 'PCC documentation support',
-    color: 'from-teal-400 to-teal-600',
-    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: Stamp,
+    title: "Embassy Attestation",
+    description:
+      "Document attestation services for all embassies and government offices.",
+    image:
+      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: Banknote, 
-    title: 'Forex Services', 
-    desc: 'Currency exchange',
-    color: 'from-lime-400 to-lime-600',
-    image: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: Shield,
+    title: "Travel Insurance",
+    description:
+      "Comprehensive international travel insurance for peace of mind.",
+    image:
+      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800",
   },
-  { 
-    icon: Ship, 
-    title: 'Luxury Cruises', 
-    desc: 'Premium sea voyages',
-    color: 'from-sky-400 to-sky-600',
-    image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=800&q=80'
+  {
+    icon: FileCheck,
+    title: "Police Clearance",
+    description:
+      "PCC assistance and documentation support for immigration purposes.",
+    image:
+      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    icon: Banknote,
+    title: "Forex Services",
+    description:
+      "Foreign exchange and international fund transfer at best rates.",
+    image:
+      "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    icon: Ship,
+    title: "Luxury Cruises",
+    description: "Premium cruise liner bookings for unforgettable sea voyages.",
+    image:
+      "https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
@@ -108,23 +149,26 @@ const Hero = () => {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const openWhatsApp = () => {
     const message = encodeURIComponent(
-      'Hello! I would like to enquire about your travel services.'
+      "Hello! I would like to enquire about your travel services."
     );
-    window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+    window.open(`https://wa.me/7510676799?text=${message}`, "_blank");
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src={'./paradisiacal-landscape-with-ocean.jpg'}
+          src={"./paradisiacal-landscape-with-ocean.jpg"}
           alt="Beautiful tropical destination"
           className="w-full h-full object-cover"
         />
@@ -139,7 +183,7 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-primary-foreground"
           >
             {/* Badge */}
@@ -150,7 +194,9 @@ const Hero = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
             >
               <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-              <span className="text-sm font-medium">Trusted by 5400+ Travelers</span>
+              <span className="text-sm font-medium">
+                Trusted by 1000+ Travelers
+              </span>
             </motion.div>
 
             {/* Headline */}
@@ -172,8 +218,10 @@ const Hero = () => {
               transition={{ delay: 0.5, duration: 0.8 }}
               className="text-lg sm:text-xl text-primary-foreground/80 max-w-xl mb-10 leading-relaxed"
             >
-              Experience world-class travel services with IATA & ISO certified excellence. 
-              From dream destinations to seamless journeys—we make every trip unforgettable.
+              We provide reliable and personalized travel solutions designed to
+              make your journeys smooth and memorable. From ticket bookings to
+              complete travel assistance, our team is committed to delivering
+              excellent service at every step.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -184,7 +232,7 @@ const Hero = () => {
               className="flex flex-wrap gap-4"
             >
               <button
-                onClick={() => scrollToSection('#contact')}
+                onClick={() => scrollToSection("#contact")}
                 className="btn-hero-primary flex items-center gap-2 group"
               >
                 Plan Your Trip
@@ -202,48 +250,52 @@ const Hero = () => {
 
           {/* Services Grid - Desktop */}
           <div className="hidden lg:grid grid-cols-2 gap-6 relative min-h-[420px]">
-           
             <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full -z-10" />
-            
+
             <AnimatePresence mode="wait">
               {visibleServices.map((service, index) => (
                 <motion.div
                   key={service.title}
                   initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-                  animate={{ 
-                    opacity: 1, 
-                    scale: 1, 
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
                     rotateY: 0,
-                    transition: { duration: 0.5, delay: index * 0.1 }
+                    transition: { duration: 0.5, delay: index * 0.1 },
                   }}
-                  exit={{ opacity: 0, scale: 0.8, rotateY: -90, transition: { duration: 0.3 } }}
-                  whileHover={{ 
-                    scale: 1.15, 
+                  exit={{
+                    opacity: 0,
+                    scale: 0.8,
+                    rotateY: -90,
+                    transition: { duration: 0.3 },
+                  }}
+                  whileHover={{
+                    scale: 1.15,
                     zIndex: 20,
-                    transition: { duration: 0.3 }
+                    transition: { duration: 0.3 },
                   }}
                   className="relative p-6 rounded-2xl border border-white/10 backdrop-blur-md cursor-pointer flex flex-col items-start justify-between h-48 group overflow-hidden"
                 >
-                  
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0">
-                    <img 
-                      src={service.image} 
-                      alt={service.title} 
+                    <img
+                      src={service.image}
+                      alt={service.title}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black/60" /> 
+                    <div className="absolute inset-0 bg-black/60" />
                   </div>
 
-                  
                   <div className="relative z-10 w-full h-full flex flex-col justify-between">
-                    <div className={`
+                    <div
+                      className={`
                       w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} 
                       flex items-center justify-center text-white shadow-lg mb-4 
                       group-hover:scale-110 transition-transform duration-300
-                    `}>
+                    `}
+                    >
                       <service.icon className="w-6 h-6" />
                     </div>
-                    
+
                     <div>
                       <h3 className="text-xl font-display font-bold text-white mb-2 drop-shadow-md">
                         {service.title}
@@ -258,8 +310,6 @@ const Hero = () => {
             </AnimatePresence>
           </div>
         </div>
-
-
       </div>
 
       {/* Scroll Indicator */}

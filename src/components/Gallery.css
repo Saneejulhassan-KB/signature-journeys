@@ -39,10 +39,13 @@
   display: table-cell;
   vertical-align: bottom;
   position: relative;
-  width: 16.666%; /* 6 into 100 */
+  width: 16.666%;
+  /* 6 into 100 */
   height: 250px;
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: cover;
+  cursor: pointer;
   transition: all 500ms ease;
 }
 
@@ -88,14 +91,18 @@
   font-size: 24px;
   text-transform: uppercase;
   margin-bottom: 2px;
-  bottom: 80px; /* Adjusted bottom positioning for large screens */
-  top: 10px; /* Remove top positioning */
+  bottom: 80px;
+  /* Adjusted bottom positioning for large screens */
+  top: 10px;
+  /* Remove top positioning */
 }
 
 .gallery-accordion .gallery-ul .gallery-li .gallery-div .gallery-a .gallery-p {
   font-size: 13.5px;
-  bottom: 50px; /* Adjusted bottom positioning for large screens */
-  top: 10px; /* Remove top positioning */
+  bottom: 50px;
+  /* Adjusted bottom positioning for large screens */
+  top: 10px;
+  /* Remove top positioning */
 }
 
 /* --- MODIFIED RULES BELOW --- */
@@ -143,26 +150,32 @@
   }
 
   .gallery-accordion .gallery-ul {
-    display: block; /* Stack items vertically */
+    display: block;
+    /* Stack items vertically */
   }
 
   .gallery-accordion .gallery-ul .gallery-li {
-    width: 100%; /* Full width on mobile */
+    width: 100%;
+    /* Full width on mobile */
     display: block;
-    height: 80px; /* Default collapsed height for mobile */
-    transition: height 500ms ease, background 200ms ease; /* Smooth vertical transition */
+    height: 80px;
+    /* Default collapsed height for mobile */
+    transition: height 500ms ease, background 200ms ease;
+    /* Smooth vertical transition */
   }
 
   .gallery-accordion .gallery-ul .gallery-li.active {
-    height: 250px; /* Expanded height for active item on mobile */
+    height: 250px;
+    /* Expanded height for active item on mobile */
   }
 
   /* Override hover styles for mobile */
-  .gallery-accordion .gallery-ul:hover .gallery-li { 
-    width: 100%; 
+  .gallery-accordion .gallery-ul:hover .gallery-li {
+    width: 100%;
   }
-  .gallery-accordion .gallery-ul:hover .gallery-li:hover { 
-    width: 100%; 
+
+  .gallery-accordion .gallery-ul:hover .gallery-li:hover {
+    width: 100%;
   }
 
   /* Content visibility on active item for mobile */
@@ -185,19 +198,23 @@
 
   .gallery-accordion .gallery-ul .gallery-li .gallery-div .gallery-a .gallery-h2,
   .gallery-accordion .gallery-ul .gallery-li .gallery-div .gallery-a .gallery-p {
-    top: calc(100% - 90px); /* Adjust text position for vertical expansion */
-    bottom: auto; /* Remove bottom positioning for mobile */
+    top: calc(100% - 90px);
+    /* Adjust text position for vertical expansion */
+    bottom: auto;
+    /* Remove bottom positioning for mobile */
   }
 
   .gallery-accordion .gallery-ul,
   .gallery-accordion .gallery-ul:hover {
+
     .gallery-li,
     .gallery-li:hover {
       position: relative;
       display: block;
       table-layout: auto;
       width: 100%;
-      transition: height 500ms ease; /* Only height transition for vertical */
+      transition: height 500ms ease;
+      /* Only height transition for vertical */
     }
   }
 }
